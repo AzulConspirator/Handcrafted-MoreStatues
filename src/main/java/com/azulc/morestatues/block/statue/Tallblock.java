@@ -39,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 public class Tallblock extends baseblock {
     public static final MapCodec<Tallblock> CODEC = simpleCodec(Tallblock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    private static final VoxelShape SHAPE = Block.box(2, 0, 5, 11, 16, 11);
+    private static final VoxelShape[] SHAPE = new VoxelShape[]{Block.box(2, 0, 5, 11, 16, 11)};
     
     public Tallblock(Properties properties) {
         super(properties);
@@ -57,29 +57,29 @@ public class Tallblock extends baseblock {
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        VoxelShape registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
+        VoxelShape[] registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
         if (registeredShape != SHAPE)
         {
             if (state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)) 
             {
-                return state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? registeredShape : Shapes.empty(); // The upper half gets a standardized bounding column
+                return state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? registeredShape[0] : Shapes.empty(); // The upper half gets a standardized bounding column
             }
         }
-        return registeredShape;
+        return registeredShape[0];
     }
 
     @Override
     public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        VoxelShape registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
+        VoxelShape[] registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
         if (registeredShape != SHAPE)
         {
             if (state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)) 
             {
-                return state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? registeredShape : Shapes.empty(); // The upper half gets a standardized bounding column
+                return state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? registeredShape[0] : Shapes.empty(); // The upper half gets a standardized bounding column
             }
         }
-        return registeredShape;
+        return registeredShape[0];
     }
 
     @Override

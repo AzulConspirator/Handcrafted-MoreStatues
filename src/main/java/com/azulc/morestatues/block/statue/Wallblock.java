@@ -3,8 +3,6 @@ package com.azulc.morestatues.block.statue;
 import com.azulc.morestatues.morestatues;
 import com.azulc.morestatues.block.base.baseblock;
 import com.azulc.morestatues.block.entity.MoreStatueEntityBlock;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -21,16 +19,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumMap;
-
 public class Wallblock extends baseblock {
     public static final MapCodec<Wallblock> CODEC = simpleCodec(Wallblock::new);
-    private static final EnumMap<Direction, VoxelShape> AABBS = Maps.newEnumMap(
-        ImmutableMap.of(
-            Direction.NORTH, Block.box(0.0, 4.5, 14.0, 16.0, 12.5, 16.0),
-            Direction.SOUTH, Block.box(0.0, 4.5, 0.0, 16.0, 12.5, 2.0),
-            Direction.EAST, Block.box(0.0, 4.5, 0.0, 2.0, 12.5, 16.0),
-            Direction.WEST, Block.box(14.0, 4.5, 0.0, 16.0, 12.5, 16.0)));
+    private static final VoxelShape[] AABBS =  {
+        Block.box(0.0, 4.5, 14.0, 16.0, 12.5, 16.0), // north
+        Block.box(0.0, 4.5, 0.0, 16.0, 12.5, 2.0), // south
+        Block.box(14.0, 4.5, 0.0, 16.0, 12.5, 16.0), //west
+        Block.box(0.0, 4.5, 0.0, 2.0, 12.5, 16.0)}; // east
 
     public Wallblock(Properties properties) {
         super(properties);
@@ -44,15 +39,56 @@ public class Wallblock extends baseblock {
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        VoxelShape registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, AABBS.get(state.getValue(FACING)));
-        return registeredShape;
+        VoxelShape[] registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, AABBS);
+        Direction facing = state.getValue(FACING);
+        int index = switch (facing) {
+            case NORTH -> 0;
+            case SOUTH -> 1;
+            case WEST  -> 2;
+            case EAST  -> 3;
+            default    -> 0;
+        };
+
+        // Safety Check: If the array doesn't have 4 shapes, fall back to index 0
+        if (index < registeredShape.length && registeredShape[index] != null) {
+            return registeredShape[index];
+        }
+        else if (registeredShape[0] != null)
+        {
+            return registeredShape[0];
+        }
+        else
+        {
+            return AABBS[index];
+        }
     }
     @Override
     public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        VoxelShape registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, AABBS.get(state.getValue(FACING)));
-        return registeredShape;
+        VoxelShape[] registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, AABBS);
+        Direction facing = state.getValue(FACING);
+        int index = switch (facing) {
+            case NORTH -> 0;
+            case SOUTH -> 1;
+            case WEST  -> 2;
+            case EAST  -> 3;
+            default    -> 0;
+        };
+
+        // Safety Check: If the array doesn't have 4 shapes, fall back to index 0
+        if (index < registeredShape.length && registeredShape[index] != null) {
+            return registeredShape[index];
+        }
+        else if (registeredShape[0] != null)
+        {
+            return registeredShape[0];
+        }
+        else
+        {
+            return AABBS[index];
+        }
     }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED, VARIANT,POSE);

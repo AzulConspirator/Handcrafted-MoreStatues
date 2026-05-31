@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 public class Longblock extends baseblock{
     public static final MapCodec<Longblock> CODEC = simpleCodec(Longblock::new);
     public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
-    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 5, 16);
+    private static final VoxelShape[] SHAPE =  new VoxelShape[]{Block.box(0, 0, 0, 16, 5, 16)};
 
     public Longblock(Properties properties) {
         super(properties);
@@ -54,17 +54,48 @@ public class Longblock extends baseblock{
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        VoxelShape registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
+        VoxelShape[] registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
         // note: it applies to both halves (less headache for directionality), best to keep them connected on the sides
         // default is practically a slab, so it should be fine for most statues
-        return registeredShape;
+        // Get the current facing of the block
+        Direction facing = state.getValue(FACING);
+
+        // Map Direction to your array indices: North=0, South=1, West=2, East=3
+        int index = switch (facing) {
+            case NORTH -> 0;
+            case SOUTH -> 1;
+            case WEST  -> 2;
+            case EAST  -> 3;
+            default    -> 0;
+        };
+
+        // Safety Check: If the array doesn't have 4 shapes, fall back to index 0
+        if (index < registeredShape.length && registeredShape[index] != null) {
+            return registeredShape[index];
+        }
+        return registeredShape[0];
     }
     @Override   public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-        VoxelShape registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
+        VoxelShape[] registeredShape = morestatues.STATUE_SHAPES.getOrDefault(id, SHAPE);
         // note: it applies to both halves (less headache for directionality), best to keep them connected on the sides
         // default is practically a slab, so it should be fine for most statues
-        return registeredShape;
+        Direction facing = state.getValue(FACING);
+
+        // Map Direction to your array indices: North=0, South=1, West=2, East=3
+        int index = switch (facing) {
+            case NORTH -> 0;
+            case SOUTH -> 1;
+            case WEST  -> 2;
+            case EAST  -> 3;
+            default    -> 0;
+        };
+
+        // Safety Check: If the array doesn't have 4 shapes, fall back to index 0
+        if (index < registeredShape.length && registeredShape[index] != null) {
+            return registeredShape[index];
+        }
+        return registeredShape[0];
     }
 
     @Override
