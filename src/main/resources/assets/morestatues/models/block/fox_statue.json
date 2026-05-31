@@ -1,0 +1,142 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "texture_size": [
+    64,
+    32
+  ],
+  "textures": {
+    "all": "morestatues:block/fox_statue",
+		"particle": "morestatues:block/fox_statue"
+	},
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        136,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        1.25
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        136,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        1.25
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        136,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        1.25
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        136,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        1.25
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        -0.75,
+        -1.5
+      ],
+      "scale": [
+        0.49,
+        0.49,
+        0.49
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        -135,
+        0
+      ],
+      "translation": [
+        0.75,
+        -4.5,
+        0
+      ],
+      "scale": [
+        0.69,
+        0.69,
+        0.69
+      ]
+    },
+    "head": {
+      "translation": [
+        0,
+        -5,
+        -11.25
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "fixed": {
+      "translation": [
+        0,
+        -6,
+        -5.25
+      ],
+      "scale": [
+        0.92,
+        0.92,
+        0.92
+      ]
+    },
+    "on_shelf": {
+      "rotation": [
+        0,
+        180,
+        0
+      ]
+    }
+  }
+}
