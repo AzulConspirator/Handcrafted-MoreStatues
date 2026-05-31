@@ -50,6 +50,9 @@ public class mobstatue_recipeprovider extends RecipeProvider implements IConditi
                 case "ravager_statue" -> new Item[]{Items.STICK, Items.SADDLE, Items.IRON_INGOT};
                 case "slime_statue" -> new Item[]{Items.GLASS, Items.SLIME_BALL,Items.GLASS};
                 case "magmacube_statue" -> new Item[]{Items.MAGMA_CREAM, Items.BASALT,Items.BLACKSTONE};
+                case "sniffer_statue" -> new Item[]{Items.CLAY, Items.SNIFFER_EGG, Items.BRUSH};
+                case "fox_statue" -> new Item[]{Items.STICK, Items.SWEET_BERRIES,Items.STICK};
+                case "strider_statue" -> new Item[]{Items.ROTTEN_FLESH, Items.MAGMA_BLOCK,Items.NETHER_BRICKS};
                 default -> null; // Handle unexpected cases
             };
             if (item != null) {
@@ -63,9 +66,9 @@ public class mobstatue_recipeprovider extends RecipeProvider implements IConditi
         .pattern("SSS")
         .pattern("SAS")
         .pattern("SBS")
-        .define('S', items[0])
-        .define('A', items[1])
-        .define('B', items[2])
+        .define('S', items[0]) // surrounding
+        .define('A', items[1]) // Core
+        .define('B', items[2]) // Additonal Bottom else Reuse Surrounding
         .unlockedBy(getName(), has(Items.STICK))
         .save(recipeOutput, BuiltInRegistries.BLOCK.getKey(block_output).getPath());
     }

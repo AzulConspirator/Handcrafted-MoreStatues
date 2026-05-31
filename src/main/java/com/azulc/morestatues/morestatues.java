@@ -18,7 +18,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -59,6 +58,7 @@ public class morestatues
     public static final DeferredBlock<Block> GHAST_STATUE                   = registerStatue("ghast_statue", StatueType.TALL,new VoxelShape[]{CONSTANTS.GhastShape()});
     public static final DeferredBlock<Block> GHAST_FIREBALL_STATUE          = registerStatue("ghast_fireball_statue", StatueType.TALL); 
     public static final DeferredBlock<Block> ENDERMAN_STATUE                = registerStatue("enderman_statue", StatueType.TALL);
+    public static final DeferredBlock<Block> STRIDER_STATUE                = registerStatue("strider_statue", StatueType.TALL);
     public static final DeferredBlock<Block> SKELETON_STATUE                = registerStatue("skeleton_statue", StatueType.TALL);
     //public static final DeferredBlock<Block> WITHER_SKELETON_STATUE       = registerStatue("wither_skeleton_statue", StatueType.TALL);
     //

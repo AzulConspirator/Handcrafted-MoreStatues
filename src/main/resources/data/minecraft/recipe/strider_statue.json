@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:magma_block"
+    },
+    "B": {
+      "item": "minecraft:nether_bricks"
+    },
+    "S": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morestatues:strider_statue"
+  }
+}

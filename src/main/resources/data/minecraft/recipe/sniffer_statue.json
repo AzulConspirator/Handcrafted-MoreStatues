@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:sniffer_egg"
+    },
+    "B": {
+      "item": "minecraft:brush"
+    },
+    "S": {
+      "item": "minecraft:clay"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morestatues:sniffer_statue"
+  }
+}
